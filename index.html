@@ -1,19 +1,145 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Use Yari</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Yari</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: #0f172a;
+    color: white;
+}
+
+/* HERO */
+.hero {
+    text-align: center;
+    padding: 120px 20px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    background: linear-gradient(90deg, #6366f1, #22d3ee);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+    color: #cbd5f5;
+    font-size: 18px;
+}
+
+.btn {
+    margin-top: 20px;
+    padding: 12px 25px;
+    border: none;
+    background: linear-gradient(135deg, #6366f1, #22d3ee);
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* SECTION */
+.section {
+    padding: 100px 20px;
+    text-align: center;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: #1e293b;
+    padding: 20px;
+    border-radius: 10px;
+    width: 250px;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+}
+
+/* ANIMATION */
+.fade {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 1s;
+}
+
+.fade.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+</style>
 </head>
-<body style="text-align:center; font-family:sans-serif;">
 
-<h1>Campus Currency Yari</h1>
-<p>Earn. Spend. Connect.</p>
+<body>
 
-<h2>What is Yari?</h2>
-<p>A digital reward system for students inside campus.</p>
+<!-- HERO -->
+<div class="hero fade">
+    <h1>The Digital Economy for Campus Life</h1>
+    <p>Earn. Spend. Connect.</p>
 
-<button onclick="window.location.href='https://forms.gle/YOURFORM'">
-Join Waitlist
-</button>
+    <button class="btn" onclick="window.location.href='https://forms.gle/2RSp3hLQq5BYNDTAA'">
+        🚀 Join Early Access
+    </button>
+</div>
+
+<!-- PROBLEM -->
+<div class="section fade">
+    <h2>The Problem</h2>
+    <p>Campus engagement is low. Students are not rewarded. Vendors lack connection.</p>
+</div>
+
+<!-- SOLUTION -->
+<div class="section fade">
+    <h2>The Solution</h2>
+    <p>Yari builds a digital reward ecosystem where students earn and spend within campus.</p>
+</div>
+
+<!-- HOW -->
+<div class="section fade">
+    <h2>How It Works</h2>
+    <div class="flex">
+        <div class="card">🎯 Earn through events & tasks</div>
+        <div class="card">💰 Store in wallet</div>
+        <div class="card">🛍 Spend inside campus</div>
+    </div>
+</div>
+
+<!-- WHY -->
+<div class="section fade">
+    <h2>Why Yari Wins</h2>
+    <p>Boosts engagement, drives campus economy, and builds a connected ecosystem.</p>
+</div>
+
+<!-- FOUNDER -->
+<div class="section fade">
+    <h2>About Founder</h2>
+    <p>Built by <b>Yash Sharma</b><br>MBA student building campus ecosystems</p>
+</div>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+        }
+    });
+});
+
+document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>
