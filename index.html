@@ -3,82 +3,140 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Use Yari</title>
 
-<title>Yari</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 body {
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    background: #0f172a;
-    color: white;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #0f172a;
+  color: white;
 }
 
 /* HERO */
 .hero {
-    text-align: center;
-    padding: 120px 20px;
+  text-align: center;
+  padding: 120px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* glowing blobs */
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, #6366f1, transparent 70%);
+  top: -100px;
+  left: -100px;
+  animation: float 6s infinite ease-in-out;
+  opacity: 0.4;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, #22d3ee, transparent 70%);
+  bottom: -100px;
+  right: -100px;
+  animation: float 8s infinite ease-in-out;
+  opacity: 0.3;
+}
+
+.hero > * {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(30px); }
+  100% { transform: translateY(0px); }
 }
 
 .hero h1 {
-    font-size: 48px;
-    background: linear-gradient(90deg, #6366f1, #22d3ee);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  font-size: 48px;
+  background: linear-gradient(90deg, #6366f1, #22d3ee);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .hero p {
-    color: #cbd5f5;
-    font-size: 18px;
+  color: #cbd5f5;
+  font-size: 18px;
 }
 
 .btn {
-    margin-top: 20px;
-    padding: 12px 25px;
-    border: none;
-    background: linear-gradient(135deg, #6366f1, #22d3ee);
-    color: white;
-    border-radius: 8px;
-    cursor: pointer;
+  margin-top: 20px;
+  padding: 12px 25px;
+  border: none;
+  background: linear-gradient(135deg, #6366f1, #22d3ee);
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+/* MOCKUP */
+.mockup {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.phone {
+  width: 260px;
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(99,102,241,0.4);
+  animation: float 4s infinite ease-in-out;
 }
 
 /* SECTION */
 .section {
-    padding: 100px 20px;
-    text-align: center;
+  padding: 80px 20px;
+  text-align: center;
 }
 
+.section p {
+  color: #94a3b8;
+}
+
+/* CARDS */
 .flex {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 .card {
-    background: #1e293b;
-    padding: 20px;
-    border-radius: 10px;
-    width: 250px;
-    transition: 0.3s;
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 12px;
+  width: 250px;
+  transition: 0.3s;
 }
 
 .card:hover {
-    transform: translateY(-8px);
+  transform: translateY(-5px);
 }
 
-/* ANIMATION */
+/* FADE ANIMATION */
 .fade {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: 1s;
-}
-
-.fade.show {
-    opacity: 1;
-    transform: translateY(0);
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.6s ease;
 }
 </style>
 </head>
@@ -87,58 +145,88 @@ body {
 
 <!-- HERO -->
 <div class="hero fade">
-    <h1>The Digital Economy for Campus Life</h1>
-    <p>Earn. Spend. Connect.</p>
+  <h1>The Digital Economy for Campus Life</h1>
+  <p id="typing"></p>
 
-    <button class="btn" onclick="window.location.href='https://forms.gle/2RSp3hLQq5BYNDTAA'">
-        🚀 Join Early Access
-    </button>
+  <button class="btn" onclick="window.location.href='https://forms.gle/2RSp3hLQq5BYNDTA4'">
+    🚀 Join Early Access
+  </button>
+
+  <p style="margin-top:15px; font-size:14px; color:#64748b;">
+    🚀 100+ students already joined waitlist
+  </p>
+
+  <!-- MOCK APP -->
+  <div class="mockup">
+    <div class="phone">
+      <p>💰 Balance: 120 Yari</p>
+      <p>🎯 Attend event → +20</p>
+      <p>🛍 Cafe spend → -15</p>
+    </div>
+  </div>
 </div>
+
+<hr style="border:none; height:1px; background:#1e293b;">
 
 <!-- PROBLEM -->
 <div class="section fade">
-    <h2>The Problem</h2>
-    <p>Campus engagement is low. Students are not rewarded. Vendors lack connection.</p>
+  <h2>The Problem</h2>
+  <p>
+    Students have no incentive to participate.<br>
+    Vendors struggle with engagement.<br>
+    No unified campus system exists.
+  </p>
 </div>
+
+<hr style="border:none; height:1px; background:#1e293b;">
 
 <!-- SOLUTION -->
 <div class="section fade">
-    <h2>The Solution</h2>
-    <p>Yari builds a digital reward ecosystem where students earn and spend within campus.</p>
+  <h2>The Solution</h2>
+  <p>
+    Yari creates a campus-wide digital currency that rewards students,
+    connects vendors, and powers engagement.
+  </p>
 </div>
+
+<hr style="border:none; height:1px; background:#1e293b;">
 
 <!-- HOW -->
 <div class="section fade">
-    <h2>How It Works</h2>
-    <div class="flex">
-        <div class="card">🎯 Earn through events & tasks</div>
-        <div class="card">💰 Store in wallet</div>
-        <div class="card">🛍 Spend inside campus</div>
-    </div>
+  <h2>How It Works</h2>
+  <div class="flex">
+    <div class="card">🎯 Earn via events</div>
+    <div class="card">💰 Store in wallet</div>
+    <div class="card">🛍 Spend in campus</div>
+  </div>
 </div>
 
-<!-- WHY -->
-<div class="section fade">
-    <h2>Why Yari Wins</h2>
-    <p>Boosts engagement, drives campus economy, and builds a connected ecosystem.</p>
-</div>
-
-<!-- FOUNDER -->
-<div class="section fade">
-    <h2>About Founder</h2>
-    <p>Built by <b>Yash Sharma</b><br>MBA student building campus ecosystems</p>
-</div>
-
+<!-- SCRIPT -->
 <script>
+// typing effect
+const text = "Earn. Spend. Connect.";
+let i = 0;
+function typeWriter() {
+  if (i < text.length) {
+    document.getElementById("typing").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeWriter, 40);
+  }
+}
+typeWriter();
+
+// scroll animation
+const faders = document.querySelectorAll('.fade');
+
 const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add("show");
-        }
-    });
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    entry.target.style.opacity = 1;
+    entry.target.style.transform = "translateY(0)";
+  });
 });
 
-document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+faders.forEach(f => observer.observe(f));
 </script>
 
 </body>
