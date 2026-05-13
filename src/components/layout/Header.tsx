@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Bell, RefreshCw, TrendingUp, TrendingDown, Sun, Moon, Wallet } from 'lucide-react';
+import Image from 'next/image';
 import { STOCKS } from '@/lib/data';
 import { useTheme } from '@/lib/theme';
 import { useTrading } from '@/lib/trading';
@@ -139,9 +140,9 @@ export default function Header() {
 
         {/* User avatar */}
         <button className="flex items-center gap-2 h-8 pl-2 pr-2.5 rounded-lg transition-colors hover:bg-[var(--bg3)]">
-          <div className="w-6 h-6 rounded-full flex items-center justify-center"
-            style={{ background: 'linear-gradient(135deg, #387ED1, #8B5CF6)' }}>
-            <span className="text-white text-[9px] font-bold">YS</span>
+          <div className="relative w-6 h-6 rounded-full overflow-hidden"
+            style={{ border: '1.5px solid rgba(34,197,94,0.4)', boxShadow: '0 0 6px rgba(34,197,94,0.2)' }}>
+            <Image src="/images/ygl-founder.png" alt="Yash Sharma" fill className="object-cover" sizes="24px" />
           </div>
         </button>
       </div>

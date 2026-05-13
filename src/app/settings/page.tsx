@@ -1,8 +1,16 @@
 'use client';
 import { Settings, Sun, Moon, Palette, Bell, Shield, RefreshCw, User } from "lucide-react";
+
+const LinkedinIcon = ({ size = 12 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+  </svg>
+);
 import { useTheme } from "@/lib/theme";
 import { useTrading } from "@/lib/trading";
 import { motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function SettingsPage() {
   const { theme, toggle } = useTheme();
@@ -24,17 +32,25 @@ export default function SettingsPage() {
       {/* Profile card */}
       <div className="max-w-2xl mb-5 p-5 rounded-2xl" style={{ background: 'linear-gradient(135deg, rgba(56,126,209,0.15), rgba(139,92,246,0.15))', border: '1px solid var(--accent)' }}>
         <div className="flex items-center gap-4">
-          <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-white text-[18px] font-black"
-            style={{ background: 'linear-gradient(135deg, #387ED1, #8B5CF6)' }}>YS</div>
+          <div className="relative w-14 h-14 rounded-2xl overflow-hidden shrink-0"
+            style={{ border: '2px solid rgba(34,197,94,0.35)', boxShadow: '0 0 16px rgba(34,197,94,0.2)' }}>
+            <Image src="/images/ygl-founder.png" alt="Yash Sharma" fill className="object-cover" sizes="56px" />
+          </div>
           <div>
             <h2 className="text-[16px] font-black" style={{ color: 'var(--text)' }}>Yash Sharma</h2>
             <p className="text-[12px]" style={{ color: 'var(--text2)' }}>sharma23yash@gmail.com</p>
-            <div className="flex items-center gap-2 mt-1">
+            <div className="flex items-center gap-2 mt-1 flex-wrap">
               <span className="text-[10px] px-2 py-0.5 rounded-full font-bold"
                 style={{ background: 'rgba(56,126,209,0.2)', color: 'var(--accent)' }}>Pro Trader</span>
               <span className="text-[11px] font-semibold" style={{ color: 'var(--text3)' }}>
                 Balance: ₹{(balance / 1e5).toFixed(1)}L
               </span>
+              <a href="https://www.linkedin.com/company/113128021/" target="_blank" rel="noopener noreferrer">
+                <span className="text-[10px] px-2 py-0.5 rounded-full font-bold flex items-center gap-1"
+                  style={{ background: 'rgba(10,102,194,0.15)', color: '#0A66C2', border: '1px solid rgba(10,102,194,0.25)' }}>
+                  <LinkedinIcon size={9} /> YGL
+                </span>
+              </a>
             </div>
           </div>
         </div>

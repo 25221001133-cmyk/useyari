@@ -5,6 +5,7 @@ import SectorHeatmap from "@/components/dashboard/SectorHeatmap";
 import PortfolioSummary from "@/components/dashboard/PortfolioSummary";
 import WatchlistPanel from "@/components/watchlist/WatchlistPanel";
 import OrderPanel from "@/components/dashboard/OrderPanel";
+import YGLFounderBanner from "@/components/dashboard/YGLFounderBanner";
 
 export default function DashboardPage() {
   return (
@@ -30,6 +31,8 @@ export default function DashboardPage() {
           <WatchlistPanel compact />
         </div>
       </div>
+
+      <YGLFounderBanner />
     </div>
   );
 }

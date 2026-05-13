@@ -1,0 +1,17 @@
+{
+  "name": "UseYari — Your Investing Yaari",
+  "short_name": "UseYari",
+  "description": "India's AI-powered investing ecosystem. Trade, learn & grow together.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#090E1A",
+  "theme_color": "#387ED1",
+  "icons": [
+    {
+      "src": "/file.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

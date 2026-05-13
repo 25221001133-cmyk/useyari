@@ -32,7 +32,7 @@ export default function LeaderboardPage() {
         </div>
         <div>
           <h1 className="text-[20px] font-black" style={{ color: 'var(--text)' }}>Leaderboard</h1>
-          <p className="text-[12px]" style={{ color: 'var(--text3)' }}>Top paper traders by portfolio P&L</p>
+          <p className="text-[12px]" style={{ color: 'var(--text3)' }}>Top UseYari traders by portfolio P&L</p>
         </div>
       </div>
 

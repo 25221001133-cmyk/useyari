@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Activity, TrendingUp, TrendingDown, BarChart2, Shield, Zap } from 'lucide-react';
 import {
@@ -61,12 +61,20 @@ export default function AnalyticsPage() {
   const sectorPerf = SECTOR_DATA.map(s => ({ ...s, fill: s.change >= 0 ? 'var(--green)' : 'var(--red)' }))
     .sort((a, b) => b.change - a.change);
 
-  // Monthly P&L simulation
-  const monthlyData = Array.from({ length: 6 }, (_, i) => {
+  // Monthly P&L simulation — seeded by totalPnL so values are stable per session
+  const monthlyData = useMemo(() => {
     const months = ['Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May'];
-    const val = totalPnL * (0.4 + Math.random() * 0.6) * (Math.random() > 0.3 ? 1 : -1);
-    return { month: months[i], pnl: Math.round(val * (i + 1) / 6) };
-  });
+    const seed = Math.abs(totalPnL) || 12345;
+    return Array.from({ length: 6 }, (_, i) => {
+      // Deterministic pseudo-random using integer arithmetic
+      const s1 = Math.sin(seed * (i + 1) * 2.3) * 10000;
+      const s2 = Math.sin(seed * (i + 2) * 1.7) * 10000;
+      const frac1 = s1 - Math.floor(s1);
+      const frac2 = s2 - Math.floor(s2);
+      const val = totalPnL * (0.4 + frac1 * 0.6) * (frac2 > 0.3 ? 1 : -1);
+      return { month: months[i], pnl: Math.round(val * (i + 1) / 6) };
+    });
+  }, [totalPnL]);
 
   return (
     <div className="p-5 space-y-5">

@@ -116,12 +116,12 @@ function generateAIResponse(query: string, positions: ReturnType<typeof useTradi
 
   // AI features intro
   if (q.includes('hello') || q.includes('hi') || q.includes('hey') || q.includes('help')) {
-    return `👋 Hello! I'm your **AI Investment Assistant**, powered by StockSim AI.\n\n🎯 **What I can help with:**\n• 📊 Deep stock analysis (ask about any NSE/BSE stock)\n• 🏥 Portfolio Doctor — health check your holdings\n• ⚡ Swing trade ideas with entry/exit levels\n• 🌱 Long-term investment suggestions\n• 📖 Options & F&O education\n• 🛡️ Risk management guidance\n• 📈 Market overview & sector rotation\n• 🎓 Learning mode (explain any concept)\n\n**Try asking:**\n• *"Should I buy TCS?"*\n• *"Give me price targets for RELIANCE"*\n• *"Check my portfolio health"*\n• *"Explain iron condor strategy"*\n• *"What sectors are outperforming?"*`;
+    return `👋 Hello! I'm **Yari**, your AI investing companion on UseYari.\n\n🎯 **What I can help with:**\n• 📊 Deep stock analysis (ask about any NSE/BSE stock)\n• 🏥 Portfolio Doctor — health check your holdings\n• ⚡ Swing trade ideas with entry/exit levels\n• 🌱 Long-term investment suggestions\n• 📖 Options & F&O education\n• 🛡️ Risk management guidance\n• 📈 Market overview & sector rotation\n• 🎓 Learning mode (explain any concept)\n\n**Try asking:**\n• *"Should I buy TCS?"*\n• *"Give me price targets for RELIANCE"*\n• *"Check my portfolio health"*\n• *"Explain iron condor strategy"*\n• *"What sectors are outperforming?"*`;
   }
 
   // Default with market context
   const randomStocks = [...STOCKS].sort(() => 0.5 - Math.random()).slice(0, 2);
-  return `🤖 **StockSim AI**\n\nI can help with stock analysis, options education, portfolio review, and investment ideas!\n\n**Today's Quick Picks:**\n${randomStocks.map(s => `• **${s.symbol}**: ₹${s.price.toLocaleString('en-IN')} (${s.changePercent >= 0 ? '+' : ''}${s.changePercent.toFixed(2)}%) — ${s.sector}`).join('\n')}\n\n**Try:** *"Analyze HDFC Bank"* or *"Best stocks to buy now"*`;
+  return `🤖 **Yari AI** — UseYari's investing companion\n\nI can help with stock analysis, options education, portfolio review, and investment ideas!\n\n**Today's Quick Picks:**\n${randomStocks.map(s => `• **${s.symbol}**: ₹${s.price.toLocaleString('en-IN')} (${s.changePercent >= 0 ? '+' : ''}${s.changePercent.toFixed(2)}%) — ${s.sector}`).join('\n')}\n\n**Try:** *"Analyze HDFC Bank"* or *"Best stocks to buy now"*`;
 }
 
 const QUICK_PROMPTS = [
@@ -204,8 +204,8 @@ export default function AIAssistant() {
                 <Bot size={16} className="text-white" />
               </div>
               <div>
-                <p className="text-white text-[13px] font-bold">StockSim AI</p>
-                <p className="text-white/70 text-[10px]">Investment Assistant · NSE/BSE Expert</p>
+                <p className="text-white text-[13px] font-bold">Yari AI</p>
+                <p className="text-white/70 text-[10px]">UseYari's Investing Companion · NSE/BSE</p>
               </div>
               <div className="ml-auto flex items-center gap-1.5">
                 <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />

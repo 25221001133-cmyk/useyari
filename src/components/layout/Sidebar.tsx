@@ -1,12 +1,13 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import {
   LayoutDashboard, TrendingUp, Briefcase, Star, BarChart2,
   Settings, ChevronLeft, ChevronRight, Activity, Zap,
-  Flame, Globe, Layers, Users, Target,
+  Flame, Globe, Layers, Users, Target, Sparkles,
 } from 'lucide-react';
 import clsx from 'clsx';
 
@@ -29,11 +30,14 @@ const MARKET_SECTIONS = [
 
 const BOTTOM = [
   { href: '/settings', icon: Settings, label: 'Settings' },
+  { href: '/about-ygl', icon: Sparkles, label: 'About YGL' },
 ];
 
 export default function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
+  useEffect(() => { setMounted(true); }, []);
 
   const isActive = (href: string) =>
     href === '/' ? pathname === '/' : pathname.startsWith(href);
@@ -62,8 +66,8 @@ export default function Sidebar() {
                 transition={{ duration: 0.18 }}
                 className="flex flex-col leading-none"
               >
-                <span className="font-bold text-[14px] tracking-tight whitespace-nowrap" style={{ color: 'var(--text)' }}>StockSim</span>
-                <span className="text-[10px] font-semibold tracking-widest uppercase" style={{ color: 'var(--accent)' }}>India Pro</span>
+                <span className="font-bold text-[14px] tracking-tight whitespace-nowrap" style={{ color: 'var(--text)' }}>UseYari</span>
+                <span className="text-[10px] font-semibold tracking-widest uppercase" style={{ color: 'var(--accent)' }}>Your Yaari</span>
               </motion.div>
             )}
           </AnimatePresence>
@@ -80,7 +84,7 @@ export default function Sidebar() {
           {NAV.map(({ href, icon: Icon, label }) => {
             const active = isActive(href);
             return (
-              <Link key={href} href={href}>
+              <Link key={href} href={href} suppressHydrationWarning>
                 <motion.div
                   whileHover={{ x: collapsed ? 0 : 3 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 25 }}
@@ -91,12 +95,19 @@ export default function Sidebar() {
                   style={active ? {} : { color: 'var(--text3)' }}
                 >
                   {active && (
-                    <motion.div
-                      layoutId="sidebar-active"
-                      className="absolute inset-0 rounded-lg"
-                      style={{ background: 'linear-gradient(135deg, #387ED1 0%, #8B5CF6 100%)' }}
-                      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                    />
+                    mounted ? (
+                      <motion.div
+                        layoutId="sidebar-active"
+                        className="absolute inset-0 rounded-lg"
+                        style={{ background: 'linear-gradient(135deg, #387ED1 0%, #8B5CF6 100%)' }}
+                        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                      />
+                    ) : (
+                      <div
+                        className="absolute inset-0 rounded-lg"
+                        style={{ background: 'linear-gradient(135deg, #387ED1 0%, #8B5CF6 100%)' }}
+                      />
+                    )
                   )}
                   <Icon size={17} className="relative z-10 shrink-0" style={{ color: active ? '#fff' : undefined }} />
                   <AnimatePresence>
@@ -129,7 +140,7 @@ export default function Sidebar() {
           {MARKET_SECTIONS.map(({ href, icon: Icon, label }) => {
             const active = isActive(href);
             return (
-              <Link key={href} href={href}>
+              <Link key={href} href={href} suppressHydrationWarning>
                 <div
                   className="flex items-center gap-3 h-9 px-2.5 rounded-lg transition-colors cursor-pointer hover:bg-white/5"
                   style={{ color: active ? 'var(--accent)' : 'var(--text3)' }}
@@ -157,7 +168,7 @@ export default function Sidebar() {
 
         <div className="px-2 space-y-0.5">
           {BOTTOM.map(({ href, icon: Icon, label }) => (
-            <Link key={href} href={href}>
+            <Link key={href} href={href} suppressHydrationWarning>
               <div className="flex items-center gap-3 h-10 px-2.5 rounded-lg transition-colors cursor-pointer hover:bg-white/5"
                 style={{ color: 'var(--text3)' }}>
                 <Icon size={17} className="shrink-0" />
@@ -182,9 +193,9 @@ export default function Sidebar() {
       {/* User */}
       <div className="p-3 shrink-0" style={{ borderTop: '1px solid var(--border)' }}>
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0"
-            style={{ background: 'linear-gradient(135deg, #387ED1, #8B5CF6)' }}>
-            <span className="text-white text-[11px] font-bold">YS</span>
+          <div className="relative w-8 h-8 rounded-full overflow-hidden shrink-0"
+            style={{ border: '1.5px solid rgba(34,197,94,0.4)', boxShadow: '0 0 8px rgba(34,197,94,0.2)' }}>
+            <Image src="/images/ygl-founder.png" alt="Yash Sharma" fill className="object-cover" sizes="32px" />
           </div>
           <AnimatePresence>
             {!collapsed && (
@@ -201,6 +212,30 @@ export default function Sidebar() {
           </AnimatePresence>
         </div>
       </div>
+
+      {/* YGL mini brand */}
+      <AnimatePresence>
+        {!collapsed && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="px-3 pb-2 shrink-0"
+          >
+            <Link href="/about-ygl" suppressHydrationWarning>
+              <div className="flex items-center gap-1.5 px-2 py-1.5 rounded-lg cursor-pointer transition-colors hover:bg-white/5">
+                <span className="text-[9px] font-black px-1.5 py-0.5 rounded"
+                  style={{ background: 'rgba(34,197,94,0.15)', color: '#22C55E', letterSpacing: '0.05em' }}>
+                  YGL
+                </span>
+                <span className="text-[9px] font-medium" style={{ color: 'var(--text3)' }}>
+                  Yash Growth Labs
+                </span>
+              </div>
+            </Link>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Collapse toggle */}
       <button

@@ -156,7 +156,10 @@ export default function CandlestickChart({ defaultSymbol = 'RELIANCE' }: { defau
             <button key={r} onClick={() => setRange(r)}
               className="relative px-3 py-1 rounded-md text-[12px] font-semibold transition-all"
               style={{ color: range === r ? 'var(--accent)' : 'var(--text3)' }}>
-              {range === r && <motion.div layoutId={`cs-range-${defaultSymbol}`} className="absolute inset-0 rounded-md" style={{ background: 'var(--card)' }} />}
+              {range === r && (mounted
+                ? <motion.div layoutId={`cs-range-${defaultSymbol}`} className="absolute inset-0 rounded-md" style={{ background: 'var(--card)' }} />
+                : <div className="absolute inset-0 rounded-md" style={{ background: 'var(--card)' }} />
+              )}
               <span className="relative">{r}</span>
             </button>
           ))}
